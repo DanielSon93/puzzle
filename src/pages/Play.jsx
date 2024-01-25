@@ -163,9 +163,9 @@ export default function Play() {
         {!isBegin && (
           <StyledReadyToPlay>
             <StyledReadyTitle>READY TO PLAY</StyledReadyTitle>
-            <StyledBeginBtn type="button">
+            <StyledBeginBtn type="button" onClick={() => setIsBegin(true)}>
               <StyledBeginBtnIcon />
-              <StyledBeginBtnText onClick={() => setIsBegin(true)}>begin</StyledBeginBtnText>
+              <StyledBeginBtnText>begin</StyledBeginBtnText>
             </StyledBeginBtn>
             <StyledShape type="button">
               <StyledHexagon />
