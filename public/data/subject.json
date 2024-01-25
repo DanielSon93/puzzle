@@ -1,0 +1,16 @@
+{
+  "subjects": {
+    "Television Shows": ["The Simpsons Characters", "Family Guy Characters", "Full House", "Grey's Anatomy", "Star Trek", "Bones"],
+    "Sitcoms": ["The Big Bang Theory", "Friends", "Modern Family", "Two and a Half Men", "How I Met Your Mother", "2 Broke Girls"],
+    "Teen Television": ["The Fresh Prince of Bel-Air", "iCarly", "Hannah Montana", "Saved by the Bell", "Wizards of Waverly Place", "Glee"],
+    "Celebrities": ["Taylor Swift", "Tom Cruise", "Jennifer Lopez", "Justin Bieber", "Katy Perry", "Harry Styles"],
+    "Animals": ["Types of Dog", "Farm Animals", "Most Common Pets", "Safari Animals", "General Animals", "General Animals"],
+    "Movies": ["Harry Potter", "The Wizard of Oz", "Star Wars", "Twilight", "Movies with One Word Titles 1", "Movies with One Word Titles 2"],
+    "General": ["Ice Cream Flavors", "Bedroom Items", "School Life", "Types of Gemstones", "Kitchen Items", "Kitchen Utensils"],
+    "Kids": ["Finding Nemo", "Toy Story", "Shrek", "Monsters, Inc.", "The Muppets", "Mr. Men Characters"],
+    "Disney": ["Disney Animated Movies", "Disney Princesses", "Disney Characters", "Frozen", "Disney", "Disney Villains"],
+    "Food & Drink": ["Fruits", "Popular Pizza Toppings", "Types of Food", "Types of Vegetables", "Herbs & Spices", "Types of Fruit, 1"],
+    "Science": ["Human Bones", "Algebra Word Search", "Metals, Common", "Gases", "Types of Igneous Rock", "Obscure Metals & Metalloids"],
+    "Music": ["Famous Bands", "Famous Singers with One Name", "Singers 2013", "Musical Instruments 1", "One Direction", "Musical Terms"]
+  }
+}

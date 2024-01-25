@@ -28,6 +28,11 @@ const StyledNav = styled.nav`
 const StyledNavLink = styled(Link)`
   display: flex;
   align-items: center;
+  padding: 0.5rem;
+  &:hover {
+    background-color: rgba(68, 68, 68, 1);
+    color: #fff;
+  }
 `;
 
 const StyledNavInfo = styled.span`
@@ -86,11 +91,11 @@ export default function Header() {
           <StyledTiPencil />
           <StyledNavInfo>Word Search Maker</StyledNavInfo>
         </StyledNavLink>
-        <StyledNavLink>
+        <StyledNavLink to="/">
           <StyledAiFillHome />
           <StyledNavInfo>More Puzzles</StyledNavInfo>
         </StyledNavLink>
-        <StyledNavLink>
+        <StyledNavLink to="/">
           <StyledFaSearch />
           <StyledNavInfo>Search</StyledNavInfo>
         </StyledNavLink>

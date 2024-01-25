@@ -1,13 +1,15 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Root from "./components/Root";
-import Home from "./components/Home";
-import Make from "./components/Make";
-import Play from "./components/Play";
+import Root from "./pages/Root";
+import Error from "./pages/Error";
+import Home from "./pages/Home";
+import Make from "./pages/Make";
+import Play from "./pages/Play";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
         element: <Make />,
       },
       {
-        path: "/play",
+        path: "/play/:title",
         element: <Play />,
       },
     ],
