@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Subject from "../components/Subject";
 import axios from "axios";
+import { getAllPuzzles } from "../api/firebase";
+import { set } from "firebase/database";
 
 const StyledMain = styled.main`
   display: flex;

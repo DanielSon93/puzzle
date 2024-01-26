@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, get } from "firebase/database";
+import { getDatabase, ref, set, get, child } from "firebase/database";
 import { v4 as uuid4 } from "uuid";
 
 const firebaseConfig = {
@@ -23,4 +23,19 @@ export async function addNewPuzzle(title, description, wordList, subject) {
     wordList,
     id,
   });
+}
+
+export async function getAllPuzzles() {
+  const dbRef = ref(database);
+  get(child(dbRef, "/puzzle"))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.exists());
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error("Firebase Error", error);
+    });
 }

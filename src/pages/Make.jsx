@@ -4,6 +4,7 @@ import WordInput from "../components/WordInput";
 import Warning from "../components/Warning";
 import axios from "axios";
 import { addNewPuzzle } from "../api/firebase";
+import { useNavigate } from "react-router-dom";
 
 const StyledForm = styled.form`
   width: 100%;
@@ -140,6 +141,8 @@ export default function Make() {
   const [selectedSubject, setSelectedSubject] = useState("Select Subject");
   const [wordList, setWordList] = useState([]);
   const [isWordListValid, setIsWordListValid] = useState(true);
+  const [isSubjectValid, setIsSubjectValid] = useState(true);
+  const navigate = useNavigate();
 
   const handleWordList = (word, idx) => {
     const newWordList = [...wordList];
@@ -147,18 +150,34 @@ export default function Make() {
     setWordList(newWordList);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 단어를 10개 이상 지정했는지 확인
     const validWordCnt = wordList.filter((word) => word.length > 2).length;
     if (validWordCnt < 10 && validWordCnt > 0) {
       setIsWordListValid(false);
+      return;
     } else {
       setIsWordListValid(true);
     }
 
+    // 카테고리 Select Box를 선택했는지 확인
+    if (selectedSubject === "Select Subject") {
+      setIsSubjectValid(false);
+      return;
+    } else {
+      setIsSubjectValid(true);
+    }
+
     // Firebase에 생성한 puzzle 데이터 추가
-    addNewPuzzle(title, description, wordList, selectedSubject);
+    try {
+      await addNewPuzzle(title, description, wordList, selectedSubject);
+    } catch (error) {
+      console.error("Make Error : ", error);
+    }
+
+    navigate("/");
   };
 
   useEffect(() => {
@@ -224,6 +243,7 @@ export default function Make() {
               })}
           </SelectOptions>
         </SelectBox>
+        {!isSubjectValid && <Warning text="Please select a subject"></Warning>}
       </StyledSubjectWrapper>
       <StyledSubmit type="submit">Submit</StyledSubmit>
     </StyledForm>
