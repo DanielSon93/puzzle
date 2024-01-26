@@ -154,8 +154,8 @@ export default function Make() {
     e.preventDefault();
 
     // 단어 10개 이상 지정 확인
-    const wordCnt = wordList.filter((word) => word !== "" && word.length >= 3).length;
-    if (wordCnt < 10) {
+    const validWordList = wordList.filter((word) => word !== "" && word.length >= 3);
+    if (validWordList.length < 10) {
       setIsWordError(true);
       return;
     } else {
@@ -172,7 +172,7 @@ export default function Make() {
 
     // Firebase에 생성한 puzzle 데이터 추가
     try {
-      await addNewPuzzle(title, description, wordList, selectedSubject);
+      await addNewPuzzle(title, description, validWordList, selectedSubject);
       navigate("/");
     } catch (error) {
       console.error("Make Error : ", error);

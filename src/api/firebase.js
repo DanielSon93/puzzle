@@ -16,11 +16,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-export async function addNewPuzzle(title, description, wordList, subject) {
+export async function addNewPuzzle(title, description, words, subject) {
   const id = uuid4();
   set(ref(database, `puzzle/subjects/${subject}/${title}`), {
     description,
-    wordList,
+    words,
     id,
   });
 }

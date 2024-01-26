@@ -48,16 +48,19 @@ const StyledSubTitle = styled.li`
 
 export default function Subject({ subject }) {
   const title = subject[0];
-  const titleSubject = subject[1];
+  const subTitle = Object.keys(subject[1]);
+  const titleSubject = Object.entries(subject[1]).map((e) => e[1]);
+
   const navigate = useNavigate();
 
-  const handleNavigate = (title, info) => {
-    navigate(`/play/${title.replaceAll(" ", "-")}`, {
+  const handleNavigate = (detail, detailTitle) => {
+    console.log(detail, detailTitle);
+    navigate(`/play/${detailTitle.replaceAll(" ", "-")}`, {
       state: {
-        title: title,
-        words: info.words,
-        description: info.description,
-        id: info.id,
+        title: detailTitle,
+        words: detail.words,
+        description: detail.description,
+        id: detail.id,
       },
     });
   };
@@ -94,9 +97,9 @@ export default function Subject({ subject }) {
       </StyledTitle>
       <StyledSubtitleWrapper>
         {titleSubject &&
-          Object.entries(titleSubject).map((title) => (
-            <StyledSubTitle key={uuid4()} onClick={() => handleNavigate(title[0], title[1])}>
-              {title[0]}
+          titleSubject.map((item, idx) => (
+            <StyledSubTitle key={uuid4()} onClick={() => handleNavigate(item, subTitle[idx])}>
+              {subTitle[idx]}
             </StyledSubTitle>
           ))}
       </StyledSubtitleWrapper>
