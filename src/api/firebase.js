@@ -25,12 +25,12 @@ export async function addNewPuzzle(title, description, wordList, subject) {
   });
 }
 
-export async function getAllPuzzles() {
+export async function getAllPuzzles(handleSubjects) {
   const dbRef = ref(database);
   get(child(dbRef, "/puzzle"))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot.exists());
+        handleSubjects(snapshot.val().subjects);
       } else {
         console.log("No data available");
       }

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import WordInput from "../components/WordInput";
 import Warning from "../components/Warning";
-import axios from "axios";
-import { addNewPuzzle } from "../api/firebase";
+import { addNewPuzzle, getAllPuzzles } from "../api/firebase";
 import { useNavigate } from "react-router-dom";
 
 const StyledForm = styled.form`
@@ -139,52 +138,49 @@ export default function Make() {
   const [description, setDescription] = useState("");
   const [isShowOptions, setShowOptions] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState("Select Subject");
-  const [wordList, setWordList] = useState([]);
-  const [isWordListValid, setIsWordListValid] = useState(true);
-  const [isSubjectValid, setIsSubjectValid] = useState(true);
+  const [wordList, setWordList] = useState(Array.from({ length: 30 }, () => ""));
+  const [isWordError, setIsWordError] = useState(false);
+  const [isSubjectError, setIsSubjectError] = useState(false);
+
   const navigate = useNavigate();
 
   const handleWordList = (word, idx) => {
-    const newWordList = [...wordList];
-    newWordList.push(word);
-    setWordList(newWordList);
+    const updateWordList = [...wordList];
+    updateWordList[idx] = word;
+    setWordList(() => [...updateWordList]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 단어를 10개 이상 지정했는지 확인
-    const validWordCnt = wordList.filter((word) => word.length > 2).length;
-    if (validWordCnt < 10 && validWordCnt > 0) {
-      setIsWordListValid(false);
+    // 단어 10개 이상 지정 확인
+    const wordCnt = wordList.filter((word) => word !== "" && word.length >= 3).length;
+    if (wordCnt < 10) {
+      setIsWordError(true);
       return;
     } else {
-      setIsWordListValid(true);
+      setIsWordError(false);
     }
 
-    // 카테고리 Select Box를 선택했는지 확인
+    // Subject 선택 유/무 확인
     if (selectedSubject === "Select Subject") {
-      setIsSubjectValid(false);
+      setIsSubjectError(true);
       return;
     } else {
-      setIsSubjectValid(true);
+      setIsSubjectError(false);
     }
 
     // Firebase에 생성한 puzzle 데이터 추가
     try {
       await addNewPuzzle(title, description, wordList, selectedSubject);
+      navigate("/");
     } catch (error) {
       console.error("Make Error : ", error);
     }
-
-    navigate("/");
   };
 
   useEffect(() => {
-    axios
-      .get("/data/subject.json")
-      .then((res) => setSubjectTitle(res.data.subjects))
-      .catch((error) => console.log("Make Error : ", error));
+    getAllPuzzles(setSubjectTitle);
   }, []);
 
   return (
@@ -226,7 +222,7 @@ export default function Make() {
             <WordInput key={idx} type="text" handleWordList={handleWordList} idx={idx}></WordInput>
           ))}
         </StyledWordGrid>
-        {!isWordListValid && <Warning text="At least 10 words are required"></Warning>}
+        {isWordError && <Warning text="At least 10 words are required"></Warning>}
       </StyledWordListWrapper>
       <StyledSubjectWrapper>
         <h3>Subject</h3>
@@ -243,7 +239,7 @@ export default function Make() {
               })}
           </SelectOptions>
         </SelectBox>
-        {!isSubjectValid && <Warning text="Please select a subject"></Warning>}
+        {isSubjectError && <Warning text="Please select a subject"></Warning>}
       </StyledSubjectWrapper>
       <StyledSubmit type="submit">Submit</StyledSubmit>
     </StyledForm>

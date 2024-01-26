@@ -6,6 +6,6 @@ export default function Error() {
 
   useEffect(() => {
     navigate("/");
-  }, []);
+  }, [navigate]);
   return <></>;
 }

@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Subject from "../components/Subject";
-import axios from "axios";
 import { getAllPuzzles } from "../api/firebase";
-import { set } from "firebase/database";
 
 const StyledMain = styled.main`
   display: flex;
@@ -79,10 +77,7 @@ export default function Home() {
   const [subjects, setSubjects] = useState({});
 
   useEffect(() => {
-    axios
-      .get("/data/subject.json")
-      .then((res) => setSubjects(res.data.subjects))
-      .catch((error) => console.error("Home Error : ", error));
+    getAllPuzzles(setSubjects);
   }, []);
 
   return (
