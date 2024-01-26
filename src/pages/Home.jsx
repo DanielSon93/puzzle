@@ -80,7 +80,7 @@ export default function Home() {
     axios
       .get("/data/subject.json")
       .then((res) => setSubjects(res.data.subjects))
-      .catch((error) => console.error("Get Subject Error : ", error));
+      .catch((error) => console.error("Home Error : ", error));
   }, []);
 
   return (
@@ -92,17 +92,31 @@ export default function Home() {
         </StyledImgWrapper>
         <StyledAbout>
           <StyledAboutTitle>Word Search</StyledAboutTitle>
-          <StyledStrong>We have the best collection of word search puzzles online, with new ones being added regularly.</StyledStrong>
-          <StyledAboutText>They are fun to play, but also educational, in fact, many teachers make use of them.</StyledAboutText>
-          <StyledAboutText>Puzzles are 100% free to play and work on desktop pc, mac, mobile and tablet. Or you can go old school and print them to enjoy offline later.</StyledAboutText>
+          <StyledStrong>
+            We have the best collection of word search puzzles online, with new ones being added
+            regularly.
+          </StyledStrong>
           <StyledAboutText>
-            Plus, if you're feeling a little more adventurous, why not create your very own with our simple to use <StyledMakeLink to="/make">Word Search Maker</StyledMakeLink>, and then share them
-            with your friends.
+            They are fun to play, but also educational, in fact, many teachers make use of them.
           </StyledAboutText>
-          <StyledAboutText>To get started playing, just select a game from below. Best of luck.</StyledAboutText>
+          <StyledAboutText>
+            Puzzles are 100% free to play and work on desktop pc, mac, mobile and tablet. Or you can
+            go old school and print them to enjoy offline later.
+          </StyledAboutText>
+          <StyledAboutText>
+            Plus, if you're feeling a little more adventurous, why not create your very own with our
+            simple to use <StyledMakeLink to="/make">Word Search Maker</StyledMakeLink>, and then
+            share them with your friends.
+          </StyledAboutText>
+          <StyledAboutText>
+            To get started playing, just select a game from below. Best of luck.
+          </StyledAboutText>
         </StyledAbout>
       </StyledExplanation>
-      <StyledExistWordSearch>{subjects && Object.entries(subjects).map((subject, idx) => <Subject key={idx} subject={subject} />)}</StyledExistWordSearch>
+      <StyledExistWordSearch>
+        {subjects &&
+          Object.entries(subjects).map((subject, idx) => <Subject key={idx} subject={subject} />)}
+      </StyledExistWordSearch>
     </StyledMain>
   );
 }

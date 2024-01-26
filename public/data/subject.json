@@ -1,16 +1,374 @@
 {
   "subjects": {
-    "Television Shows": ["The Simpsons Characters", "Family Guy Characters", "Full House", "Grey's Anatomy", "Star Trek", "Bones"],
-    "Sitcoms": ["The Big Bang Theory", "Friends", "Modern Family", "Two and a Half Men", "How I Met Your Mother", "2 Broke Girls"],
-    "Teen Television": ["The Fresh Prince of Bel-Air", "iCarly", "Hannah Montana", "Saved by the Bell", "Wizards of Waverly Place", "Glee"],
-    "Celebrities": ["Taylor Swift", "Tom Cruise", "Jennifer Lopez", "Justin Bieber", "Katy Perry", "Harry Styles"],
-    "Animals": ["Types of Dog", "Farm Animals", "Most Common Pets", "Safari Animals", "General Animals", "General Animals"],
-    "Movies": ["Harry Potter", "The Wizard of Oz", "Star Wars", "Twilight", "Movies with One Word Titles 1", "Movies with One Word Titles 2"],
-    "General": ["Ice Cream Flavors", "Bedroom Items", "School Life", "Types of Gemstones", "Kitchen Items", "Kitchen Utensils"],
-    "Kids": ["Finding Nemo", "Toy Story", "Shrek", "Monsters, Inc.", "The Muppets", "Mr. Men Characters"],
-    "Disney": ["Disney Animated Movies", "Disney Princesses", "Disney Characters", "Frozen", "Disney", "Disney Villains"],
-    "Food & Drink": ["Fruits", "Popular Pizza Toppings", "Types of Food", "Types of Vegetables", "Herbs & Spices", "Types of Fruit, 1"],
-    "Science": ["Human Bones", "Algebra Word Search", "Metals, Common", "Gases", "Types of Igneous Rock", "Obscure Metals & Metalloids"],
-    "Music": ["Famous Bands", "Famous Singers with One Name", "Singers 2013", "Musical Instruments 1", "One Direction", "Musical Terms"]
+    "Television Shows": {
+      "The Simpsons Characters": {
+        "description": "description",
+        "id": "1",
+        "words": [
+          "HOMER",
+          "MARGE",
+          "BART",
+          "LISA",
+          "KRUSTY",
+          "BARNEY",
+          "GRAMPA",
+          "MOE",
+          "APU",
+          "CLETUS",
+          "MR BURNS",
+          "OTTO",
+          "NELSON",
+          "NED",
+          "SELMA",
+          "PATTY",
+          "SIDESHOW BOB",
+          "RALPH",
+          "WILLIE",
+          "SMITHERS",
+          "LENNY",
+          "CARL"
+        ]
+      },
+      "Family Guy Characters": {
+        "description": "description",
+        "id": "2",
+        "words": [
+          "PETER",
+          "LOIS",
+          "CHRIS",
+          "MEG",
+          "STEWIE",
+          "BRIAN",
+          "CLEVELAND",
+          "BONNIE",
+          "JOE SWANSON",
+          "MAYOR WEST",
+          "GRIFFIN",
+          "FRANCIS",
+          "THELMA",
+          "MORT",
+          "QUAGMIRE",
+          "HERBERT",
+          "EVIL MONKEY",
+          "DEATH"
+        ]
+      },
+      "Full House": {
+        "description": "description",
+        "id": "3",
+        "words": [
+          "MICHELLE",
+          "TANNER",
+          "DONNA JO",
+          "STEPHANIE",
+          "DANNY",
+          "JOEY",
+          "JESE",
+          "REBECCA",
+          "KIMMY",
+          "STEVE",
+          "COMET",
+          "ALEX",
+          "NIKKY",
+          "VICKY",
+          "MUSIC",
+          "COMEDY",
+          "SPORTS",
+          "DANCING"
+        ]
+      },
+      "Grey's Anatomy": {
+        "description": "description",
+        "id": "4",
+        "words": [
+          "MEREDITH",
+          "GREY",
+          "BAILEY",
+          "CRISTINA",
+          "YANG",
+          "GEORGE",
+          "IZZIE",
+          "ALEX",
+          "KAREV",
+          "MERCY WEST",
+          "SEATTLE GRACE",
+          "SHEPHERD",
+          "SURGICAL",
+          "WEBBER",
+          "SLOAN",
+          "ARIZONA",
+          "LEXIE",
+          "TORRES"
+        ]
+      }
+    },
+    "Sitcoms": {
+      "The Big Bang Theory": {
+        "description": "description",
+        "id": "5",
+        "words": [
+          "LEONARD",
+          "HOWARD",
+          "PENNY",
+          "AMY",
+          "THEORY",
+          "RAJESH",
+          "SHELDON",
+          "SCIENCE",
+          "PHYSICS",
+          "COMIC BOOK",
+          "OCD",
+          "SCIENTIST",
+          "PASADENA",
+          "UNIVERSITY",
+          "BIG BANG",
+          "SPACE",
+          "CALTECH",
+          "STUART",
+          "BAZINGA"
+        ]
+      }
+    },
+    "Teen Television": {
+      "The Fresh Prince of Bel-Air": {
+        "description": "description",
+        "id": "6",
+        "words": [
+          "FRESH",
+          "PRINCE",
+          "BEL-AIR",
+          "BANKS",
+          "CARLTON",
+          "HILLARY",
+          "PHILIP",
+          "ASHLEY",
+          "VIVIAN",
+          "GEOFFREY",
+          "NICKY",
+          "JAZZY JEFF",
+          "WILL SMITH",
+          "MANSION"
+        ]
+      }
+    },
+    "Celebrities": {
+      "Taylor Swift": {
+        "description": "description",
+        "id": "7",
+        "words": [
+          "RED",
+          "OUR SONG",
+          "TOGETHER",
+          "TROUBLE",
+          "FEARLESS",
+          "MEAN",
+          "MINE",
+          "WHITE HORSE",
+          "RONAN",
+          "PICTURE",
+          "BELONG",
+          "LOVE STORY"
+        ]
+      }
+    },
+    "Animals": {
+      "Types of Dog": {
+        "description": "description",
+        "id": "8",
+        "words": [
+          "CHIHUAHUA",
+          "BULLDOG",
+          "TERRIER",
+          "COLLIE",
+          "SHEPHERD",
+          "BOXER",
+          "HOUND",
+          "BEAGLE",
+          "CORGI",
+          "ROTTWEILER",
+          "PINSCHER",
+          "DALMATIAN",
+          "SETTER",
+          "MASTIFF"
+        ]
+      }
+    },
+    "Movies": {
+      "Harry Potter": {
+        "description": "description",
+        "id": "9",
+        "words": [
+          "HARRY",
+          "POTTER",
+          "J.K.ROWLING",
+          "RONALD",
+          "WEASLEY",
+          "HERMIONE",
+          "GRANGER",
+          "HOGWARTS",
+          "WITCHCRAFT",
+          "WIZARDRY",
+          "VOLDEMORT",
+          "ALBUS",
+          "DUMBLEDORE",
+          "SCAR",
+          "HAGRID",
+          "DARK ARTS"
+        ]
+      }
+    },
+    "General": {
+      "Ice Cream Flavors": {
+        "description": "description",
+        "id": "10",
+        "words": [
+          "VANILLA",
+          "CHOCOLATE",
+          "STRAWBERRY",
+          "MOOSE TRACKS",
+          "REESES",
+          "TRIPLE TORNADO",
+          "PECAN",
+          "FUDGE",
+          "COOKIE DOUGH",
+          "MAPLE WALNUT",
+          "COCONUT",
+          "COTTON CANDY",
+          "HOKEY POKEY",
+          "ROCKY ROAD"
+        ]
+      }
+    },
+    "Kids": {
+      "Finding Nemo": {
+        "description": "description",
+        "id": "11",
+        "words": [
+          "FINDING",
+          "NEMO",
+          "ELLEN",
+          "MARLIN",
+          "CLOWNFISH",
+          "CORAL REEF",
+          "PELICAN",
+          "BARRACUDA",
+          "DORY",
+          "SHARKS",
+          "BRUCE",
+          "ANCHOR",
+          "CHUM",
+          "DENTIST",
+          "GILL",
+          "BLOAT",
+          "BUBBLES",
+          "PEACH",
+          "GURGLE",
+          "JACQUES, DEB"
+        ]
+      }
+    },
+    "Disney": {
+      "Disney Animated Movies": {
+        "description": "description",
+        "id": "12",
+        "words": [
+          "ALADDIN",
+          "MULAN",
+          "WALL-E",
+          "MONSTERS INC",
+          "CARS",
+          "TOY STORY",
+          "JUNGLE BOOK",
+          "PINOCCHIO",
+          "FANTASIA",
+          "DUMBO",
+          "BAMBI",
+          "CINDERELLA",
+          "PETER PAN",
+          "HERCULES",
+          "TARZAN",
+          "BOLT",
+          "POCAHONTAS",
+          "DINOSAUR"
+        ]
+      }
+    },
+    "Food & Drink": {
+      "Fruits": {
+        "description": "description",
+        "id": "13",
+        "words": [
+          "APPLE",
+          "LEMON",
+          "BANANA",
+          "LIME",
+          "ORANGE",
+          "WATERMELON",
+          "GRAPE",
+          "KIWI",
+          "STRAWBERRY",
+          "PAPAYA",
+          "BLUEBERRY",
+          "BLACKBERRY",
+          "RASPBERRY"
+        ]
+      }
+    },
+    "Science": {
+      "Human Bones": {
+        "description": "description",
+        "id": "14",
+        "words": [
+          "TEMPORAL",
+          "MANDIBLE",
+          "MALLEUS",
+          "SCAPULA",
+          "CLAVICLE",
+          "STERNUM",
+          "HUMERUS",
+          "RADIUS",
+          "ULNA",
+          "SCAPHOID",
+          "COCCYX",
+          "FEMUR",
+          "PATELLA",
+          "TIBIA",
+          "FIBULA",
+          "TALUS",
+          "METATARSAL",
+          "STAPES",
+          "HAMATE"
+        ]
+      }
+    },
+    "Music": {
+      "Famous Bands": {
+        "description": "description",
+        "id": "15",
+        "words": [
+          "ONE DIRECTION",
+          "MADNESS",
+          "PINK",
+          "PSY",
+          "MUSE",
+          "QUEEM",
+          "THE WHO",
+          "LITTLE MIX",
+          "COLDPLAY",
+          "THE KILLERS",
+          "LAWSON",
+          "OWL CITY",
+          "GREEN DAY",
+          "LIKKIN PARK",
+          "WANTED",
+          "WESTLIFE",
+          "BUSTED",
+          "BLUR",
+          "MCFLY",
+          "ELBOW",
+          "UNION J"
+        ]
+      }
+    }
   }
 }

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { v4 as uuid4 } from "uuid";
 import WordInput from "../components/WordInput";
+import Warning from "../components/Warning";
+import axios from "axios";
+import { addNewPuzzle } from "../api/firebase";
 
 const StyledForm = styled.form`
   width: 100%;
@@ -72,23 +74,50 @@ const StyledSubjectWrapper = styled.div`
   ${commonWrapperStyle}
 `;
 
-const StyledRadioLabel = styled.label`
-  margin-right: 20px;
+const SelectBox = styled.div`
+  margin-top: 5px;
+  width: 300px;
+  background-color: rgba(246, 246, 246, 1);
+  border: 1px solid lightgray;
   cursor: pointer;
 `;
 
-const StyledRadioText = styled.span`
-  color: rgba(159, 161, 157, 1);
-  font-size: 1.2rem;
-  margin-left: 6px;
+const Label = styled.label`
+  position: relative;
+  display: block;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 8px;
+  border-bottom: ${(props) => (props.$show ? "1px solid lightgray" : "none")};
+  &::before {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%) rotate(45deg);
+    color: #49c181;
+  }
 `;
 
-const StyledRadio = styled.input`
-  margin-top: 30px;
-  cursor: pointer;
-  accent-color: green;
-  &:checked + ${StyledRadioText} {
-    color: rgba(0, 187, 136, 1);
+const SelectOptions = styled.ul`
+  list-style: none;
+  width: 100%;
+  overflow-y: scroll;
+  max-height: ${(props) => (props.$show ? "200px" : "0")};
+  padding: 0;
+  background-color: rgba(246, 246, 246, 1);
+  color: var(--color-font);
+`;
+
+const Option = styled.li`
+  font-size: 14px;
+  padding: 8px;
+  &:hover {
+    background-color: #e6e4e4;
   }
 `;
 
@@ -104,45 +133,97 @@ const StyledSubmit = styled.button`
 `;
 
 export default function Make() {
+  const [subjectTitle, setSubjectTitle] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [subject, setSubject] = useState("");
+  const [isShowOptions, setShowOptions] = useState(false);
+  const [selectedSubject, setSelectedSubject] = useState("Select Subject");
+  const [wordList, setWordList] = useState([]);
+  const [isWordListValid, setIsWordListValid] = useState(true);
 
-  const handleSubmit = () => {};
+  const handleWordList = (word, idx) => {
+    const newWordList = [...wordList];
+    newWordList.push(word);
+    setWordList(newWordList);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const validWordCnt = wordList.filter((word) => word.length > 2).length;
+    if (validWordCnt < 10 && validWordCnt > 0) {
+      setIsWordListValid(false);
+    } else {
+      setIsWordListValid(true);
+    }
+
+    // Firebase에 생성한 puzzle 데이터 추가
+    addNewPuzzle(title, description, wordList, selectedSubject);
+  };
+
+  useEffect(() => {
+    axios
+      .get("/data/subject.json")
+      .then((res) => setSubjectTitle(res.data.subjects))
+      .catch((error) => console.log("Make Error : ", error));
+  }, []);
 
   return (
     <StyledForm onSubmit={handleSubmit}>
       <StyledExplanation>
-        Make your own word search game on any topic you like, simply by providing between 10 and 30 words. Once submitted, your puzzle will be instantly playable on-line as well as easily printed, so
-        you can share it with friends. Instructions are available at the bottom of this page
+        Make your own word search game on any topic you like, simply by providing between 10 and 30
+        words. Once submitted, your puzzle will be instantly playable on-line as well as easily
+        printed, so you can share it with friends. Instructions are available at the bottom of this
+        page
       </StyledExplanation>
       <StyledTitleWrapper>
         <h3>Title</h3>
-        <StyledTitleInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} maxLength="30" required />
+        <StyledTitleInput
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          maxLength="30"
+          required
+        />
       </StyledTitleWrapper>
       <StyledDescriptionWrapper>
         <h3>Description</h3>
-        <StyledDescriptionTextArea cols="30" rows="1" value={description} onChange={(e) => setDescription(e.target.value)}></StyledDescriptionTextArea>
+        <StyledDescriptionTextArea
+          cols="30"
+          rows="1"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        ></StyledDescriptionTextArea>
       </StyledDescriptionWrapper>
       <StyledWordListWrapper>
         <h3>Word List</h3>
-        <StyledWordExplanation>Between 10 and 30 words. Puzzles are randomly generated using a selection of your words at play time.</StyledWordExplanation>
+        <StyledWordExplanation>
+          Between 10 and 30 words. Puzzles are randomly generated using a selection of your words at
+          play time.
+        </StyledWordExplanation>
         <StyledWordGrid>
-          {Array.from({ length: 30 }, () => (
-            <WordInput key={uuid4()} type="text"></WordInput>
+          {Array.from({ length: 30 }, (_, idx) => (
+            <WordInput key={idx} type="text" handleWordList={handleWordList} idx={idx}></WordInput>
           ))}
         </StyledWordGrid>
+        {!isWordListValid && <Warning text="At least 10 words are required"></Warning>}
       </StyledWordListWrapper>
       <StyledSubjectWrapper>
         <h3>Subject</h3>
-        <StyledRadioLabel htmlFor="radio-1">
-          <StyledRadio type="radio" id="radio-1" name="radio" value="person" checked={subject === "person"} onChange={(e) => setSubject(e.target.value)} required />
-          <StyledRadioText>Myself, family, friends etc</StyledRadioText>
-        </StyledRadioLabel>
-        <StyledRadioLabel htmlFor="radio-2">
-          <StyledRadio type="radio" id="radio-2" name="radio" value="non-person" checked={subject === "non-person"} onChange={(e) => setSubject(e.target.value)} required />
-          <StyledRadioText>Non-Personal (recommended)</StyledRadioText>
-        </StyledRadioLabel>
+        <SelectBox onClick={() => setShowOptions((prev) => !prev)}>
+          <Label $show={isShowOptions}>{selectedSubject}</Label>
+          <SelectOptions $show={isShowOptions}>
+            {subjectTitle &&
+              Object.keys(subjectTitle).map((title, idx) => {
+                return (
+                  <Option key={idx} onClick={(e) => setSelectedSubject(e.target.innerText)}>
+                    {title}
+                  </Option>
+                );
+              })}
+          </SelectOptions>
+        </SelectBox>
       </StyledSubjectWrapper>
       <StyledSubmit type="submit">Submit</StyledSubmit>
     </StyledForm>

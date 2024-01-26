@@ -7,9 +7,9 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { v4 as uuid4 } from "uuid";
 
 const StyledPuzzleWrapper = styled.div`
+  position: relative;
   width: 100%;
   max-width: 90%;
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: start;
@@ -22,6 +22,7 @@ const StyledTitle = styled.h1`
 
 const StyledPuzzle = styled.div`
   position: relative;
+  width: 600px;
   margin-top: 10px;
 `;
 
@@ -142,9 +143,22 @@ const StyledSettingText = styled.span`
   ${commonButtonText}
 `;
 
+const StyledWordList = styled.div`
+  position: absolute;
+  top: 9%;
+  left: 620px;
+  font-weight: bold;
+`;
+
+const StyledWord = styled.p`
+  font-size: 17px;
+  padding: 2px 0;
+`;
+
 export default function Play() {
   const { state } = useLocation();
   const title = state.title;
+  const words = state.words;
   const [isBegin, setIsBegin] = useState(false);
 
   return (
@@ -178,6 +192,9 @@ export default function Play() {
           </StyledReadyToPlay>
         )}
       </StyledPuzzle>
+      <StyledWordList>
+        {words && words.map((word, idx) => <StyledWord key={idx}>{word}</StyledWord>)}
+      </StyledWordList>
     </StyledPuzzleWrapper>
   );
 }

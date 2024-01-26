@@ -13,8 +13,21 @@ const StyledWordInput = styled.input`
   height: 35px;
 `;
 
-export default function WordInput() {
+export default function WordInput({ handleWordList, idx }) {
   const [word, setWord] = useState("");
 
-  return <StyledWordInput value={word} onChange={(e) => setWord(e.target.value)} minLength="3" maxLength="12"></StyledWordInput>;
+  const handleWord = (e) => {
+    const word = e.target.value;
+    setWord(word);
+    handleWordList(word, idx);
+  };
+
+  return (
+    <StyledWordInput
+      value={word}
+      onChange={(e) => handleWord(e)}
+      minLength="3"
+      maxLength="12"
+    ></StyledWordInput>
+  );
 }
